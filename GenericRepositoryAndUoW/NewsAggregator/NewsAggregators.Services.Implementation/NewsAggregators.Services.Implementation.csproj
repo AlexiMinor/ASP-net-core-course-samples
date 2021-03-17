@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewsAggregator.Core.Interfaces.Services\NewsAggregator.Core.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\NewsAggregator.DAL.Entities\NewsAggregator.DAL.Core.csproj" />
+    <ProjectReference Include="..\NewsAggregator.DAL.RepositoriesInterfaces\NewsAggregator.DAL.Repositories.Interfaces.csproj" />
+    <ProjectReference Include="..\NewsAggregator.DAL.Repositories\NewsAggregator.DAL.Repositories.Implementation.csproj" />
+  </ItemGroup>
+
+</Project>

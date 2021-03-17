@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator", "NewsAggregator\NewsAggregator.csproj", "{BDD5FC4D-EF36-4ECD-895E-B4483C6E349B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewsAggregator.DAL", "NewsAggregator.DAL", "{942D0AD7-4B3C-42B8-8DBB-002A45BF36D7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.DAL.Core", "NewsAggregator.DAL.Entities\NewsAggregator.DAL.Core.csproj", "{C3844191-CAE9-4B53-B8CD-A9256138279B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{96CF97B3-60DC-4AE3-B0BD-74BE15594899}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewsAggregator.Core", "NewsAggregator.Core", "{EBCAF508-2D89-4AE6-9E7F-E9A8CDFF1C43}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.Core.Services.Interfaces", "NewsAggregator.Core.Interfaces.Services\NewsAggregator.Core.Services.Interfaces.csproj", "{BBC374F1-1E72-4BD4-A72D-60BD4618351F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.Core.DataTransferObjects", "NewsAggregator.Core.DataTransferObjects\NewsAggregator.Core.DataTransferObjects.csproj", "{E97BB6F6-09BA-4B73-A877-801DB835C285}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregators.Services.Implementation", "NewsAggregators.Services.Implementation\NewsAggregators.Services.Implementation.csproj", "{8C27AE08-2605-43FE-B50B-1DA0A6795AF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.DAL.Repositories.Implementation", "NewsAggregator.DAL.Repositories\NewsAggregator.DAL.Repositories.Implementation.csproj", "{AE120380-845C-44E3-8E1F-AF2B6E709FA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.DAL.Repositories.Interfaces", "NewsAggregator.DAL.RepositoriesInterfaces\NewsAggregator.DAL.Repositories.Interfaces.csproj", "{D46FDFF6-97B6-47C0-8DB5-8B8ECF0B841E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDD5FC4D-EF36-4ECD-895E-B4483C6E349B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD5FC4D-EF36-4ECD-895E-B4483C6E349B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD5FC4D-EF36-4ECD-895E-B4483C6E349B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDD5FC4D-EF36-4ECD-895E-B4483C6E349B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3844191-CAE9-4B53-B8CD-A9256138279B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3844191-CAE9-4B53-B8CD-A9256138279B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3844191-CAE9-4B53-B8CD-A9256138279B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3844191-CAE9-4B53-B8CD-A9256138279B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBC374F1-1E72-4BD4-A72D-60BD4618351F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC374F1-1E72-4BD4-A72D-60BD4618351F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC374F1-1E72-4BD4-A72D-60BD4618351F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC374F1-1E72-4BD4-A72D-60BD4618351F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E97BB6F6-09BA-4B73-A877-801DB835C285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E97BB6F6-09BA-4B73-A877-801DB835C285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E97BB6F6-09BA-4B73-A877-801DB835C285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E97BB6F6-09BA-4B73-A877-801DB835C285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C27AE08-2605-43FE-B50B-1DA0A6795AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C27AE08-2605-43FE-B50B-1DA0A6795AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C27AE08-2605-43FE-B50B-1DA0A6795AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C27AE08-2605-43FE-B50B-1DA0A6795AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE120380-845C-44E3-8E1F-AF2B6E709FA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE120380-845C-44E3-8E1F-AF2B6E709FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE120380-845C-44E3-8E1F-AF2B6E709FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE120380-845C-44E3-8E1F-AF2B6E709FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D46FDFF6-97B6-47C0-8DB5-8B8ECF0B841E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D46FDFF6-97B6-47C0-8DB5-8B8ECF0B841E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D46FDFF6-97B6-47C0-8DB5-8B8ECF0B841E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D46FDFF6-97B6-47C0-8DB5-8B8ECF0B841E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C3844191-CAE9-4B53-B8CD-A9256138279B} = {942D0AD7-4B3C-42B8-8DBB-002A45BF36D7}
+		{BBC374F1-1E72-4BD4-A72D-60BD4618351F} = {EBCAF508-2D89-4AE6-9E7F-E9A8CDFF1C43}
+		{E97BB6F6-09BA-4B73-A877-801DB835C285} = {EBCAF508-2D89-4AE6-9E7F-E9A8CDFF1C43}
+		{8C27AE08-2605-43FE-B50B-1DA0A6795AF5} = {96CF97B3-60DC-4AE3-B0BD-74BE15594899}
+		{AE120380-845C-44E3-8E1F-AF2B6E709FA3} = {942D0AD7-4B3C-42B8-8DBB-002A45BF36D7}
+		{D46FDFF6-97B6-47C0-8DB5-8B8ECF0B841E} = {942D0AD7-4B3C-42B8-8DBB-002A45BF36D7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F14EDAD-4CB2-41D0-A537-8CAFF1642B85}
+	EndGlobalSection
+EndGlobal

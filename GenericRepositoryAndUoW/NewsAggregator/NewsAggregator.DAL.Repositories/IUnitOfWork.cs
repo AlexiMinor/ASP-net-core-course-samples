@@ -1,0 +1,15 @@
+﻿using System;
+using System.Threading.Tasks;
+using NewsAggregator.DAL.Core.Entities;
+using NewsAggregator.DAL.Repositories.Interfaces;
+
+namespace NewsAggregator.DAL.Repositories.Implementation
+{
+    public interface IUnitOfWork: IDisposable
+    {
+        IRepository<News> News { get; }
+        IRepository<RssSourse> RssSources { get; }
+
+        Task<int> SaveChangesAsync();
+    }
+}
