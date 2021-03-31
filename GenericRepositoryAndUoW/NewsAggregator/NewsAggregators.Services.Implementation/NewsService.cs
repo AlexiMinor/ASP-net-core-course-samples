@@ -4,21 +4,27 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NewsAggregator.Core.DataTransferObjects;
 using NewsAggregator.Core.Services.Interfaces;
 using NewsAggregator.DAL.Core;
 using NewsAggregator.DAL.Core.Entities;
 using NewsAggregator.DAL.Repositories.Implementation;
 using NewsAggregator.DAL.Repositories.Interfaces;
+using Serilog;
 
 namespace NewsAggregators.Services.Implementation
 {
     public class NewsService : INewsService
     {
+        
         private readonly IUnitOfWork _unitOfWork;
-        public NewsService(IUnitOfWork unitOfWork)
+        private readonly IConfiguration _configuration;
+        public NewsService(IUnitOfWork unitOfWork, 
+            IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
+            _configuration = configuration;
         }
 
         public async Task<IEnumerable<NewsDto>> FindNews()
@@ -28,12 +34,18 @@ namespace NewsAggregators.Services.Implementation
 
         public async Task<IEnumerable<NewsDto>> GetNewsBySourseId(Guid? id)
         {
+            if (!id.HasValue)
+            {
+                Log.Warning("Id in NewsService.GetNewsBySourseId was null");
+            }
+
             var news = id.HasValue 
                 ? await _unitOfWork.News.FindBy(n 
                         => n.RssSourseId.Equals(id.GetValueOrDefault()))
                     .ToListAsync()
                 : await _unitOfWork.News.FindBy(n => n.Id!=null).ToListAsync();
 
+            
 
             return news.Select(n => new NewsDto()
             {
@@ -74,10 +86,26 @@ namespace NewsAggregators.Services.Implementation
 
         public async Task Test()
         {
+
             await _unitOfWork.News.AddRange(new List<News>());
             await _unitOfWork.RssSources.AddRange(new List<RssSourse>());
             await _unitOfWork.SaveChangesAsync();
 
+        }
+
+        public async Task AddOnlinerNews(NewsDto news)
+        {
+            var entity = new News()
+            {
+                Id = news.Id,
+                Article = news.Article,
+                Body = news.Body,
+                RssSourseId = news.RssSourseId,
+                Url = news.Url,
+                Body2 = news.Body2
+            };
+
+            await _unitOfWork.News.AddRange(new[] { entity });
         }
 
         public async Task AddNews(NewsDto news)

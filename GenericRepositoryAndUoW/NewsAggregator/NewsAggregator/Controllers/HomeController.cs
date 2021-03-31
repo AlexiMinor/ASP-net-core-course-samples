@@ -6,21 +6,30 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace NewsAggregator.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        
+        public HomeController()
         {
-            _logger = logger;
         }
 
         public IActionResult Index()
         {
+            try
+            {
+                //throw new NullReferenceException("test");
+
+            }
+            catch (Exception e)
+            {
+                Log.Fatal(e, "Unhanded exception was throwed by app");
+            }
             return View();
+
         }
 
         public IActionResult Privacy()

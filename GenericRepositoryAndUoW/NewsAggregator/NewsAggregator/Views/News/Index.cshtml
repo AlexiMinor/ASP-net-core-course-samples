@@ -8,18 +8,20 @@
 <h1>View</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @*<a href="~/News/Create">Create New</a>
+    @Html.ActionLink("Create New","Create", "News")*@
+    <a asp-controller="News" asp-action="Create">Create New</a>
+    @*<a asp-action="Create">Create New</a>*@
 </p>
 
-@*@Html.CreateListNews(Model.News)*@
-@foreach (var item in Model.News)
-{
-    await Html.RenderPartialAsync("ShortNewsPreview", item);
-}
 
-<div class="btn-group">
-    @{
-        var z = Url.Action("Index", new {page = 1, sourseId = Model.News.FirstOrDefault()?.RssSourseId});
+@*@Html.CreateListNews(Model.News)*@
+    @foreach (var item in Model.News)
+    {
+        await Html.RenderPartialAsync("ShortNewsPreview", item);
     }
+@*<div class="btn-group">
     @Html.CreatePagination(Model.PageInfo, i => Url.Action("Index", new {page = i, sourseId = Model.News.FirstOrDefault()?.RssSourseId}))
 </div>
+
+<pagination page-model="Model.PageInfo" page-action="Index"></pagination>*@

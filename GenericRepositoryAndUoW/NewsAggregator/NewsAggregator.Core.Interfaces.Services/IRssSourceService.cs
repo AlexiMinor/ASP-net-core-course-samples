@@ -7,7 +7,7 @@ namespace NewsAggregator.Core.Services.Interfaces
 {
     public interface IRssSourseService
     {
-        Task<IEnumerable<RssSourseDto>> FindRssSourse();
+        Task<IEnumerable<RssSourseDto>> GetAllRssSources();
         Task<RssSourseDto> GetRssSourseById(Guid id);
 
         Task<int> AddRssSourse(RssSourseDto news);
