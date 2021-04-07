@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NewsAggregator.Core.DataTransferObjects;
 using NewsAggregator.Core.Services.Interfaces;
 using NewsAggregator.Models;
 using NewsAggregator.Models.ViewModels.News;
+using NewsAggregators.Services.Implementation;
 using Serilog;
-using System.ServiceModel.Syndication;
 
 namespace NewsAggregator.Controllers
 {
@@ -19,12 +18,12 @@ namespace NewsAggregator.Controllers
     {
         private readonly INewsService _newsService;
         private readonly IRssSourseService _rssSourseService;
-        private readonly IWebPageParser _onlinerParser;
-        private readonly IWebPageParser _tutByParser;
+        private readonly OnlinerParser _onlinerParser;
+        private readonly TutByParser _tutByParser;
 
         public NewsController(INewsService newsService, 
-            IRssSourseService rssSourse, 
-            IWebPageParser onlinerParser, IWebPageParser tutByParser)
+            IRssSourseService rssSourse,
+            OnlinerParser onlinerParser, TutByParser tutByParser)
         {
             _newsService = newsService;
             _rssSourseService = rssSourse;
@@ -34,6 +33,7 @@ namespace NewsAggregator.Controllers
 
         // GET: News
 
+        [Route("Лист_новостей")]
         public async Task<IActionResult> Index(Guid? sourseId, int page = 1)
         {
             //if (sourseId == null)

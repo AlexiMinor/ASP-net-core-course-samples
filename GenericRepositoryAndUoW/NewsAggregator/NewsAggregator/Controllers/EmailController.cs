@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using NewsAggregator.Filters;
 
 namespace NewsAggregator.Controllers
 {
+    [ChromeFilter(01,02)]
     public class EmailController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -26,7 +28,7 @@ namespace NewsAggregator.Controllers
                 .ToDictionary(keyValuePair => keyValuePair.Key, 
                     keyValuePair => keyValuePair.Value);
 
-            return View();
+            return RedirectToAction("Index", "News");
         }
     }
 }

@@ -18,13 +18,13 @@ namespace NewsAggregators.Services.Implementation
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
-        public NewsService(IUnitOfWork unitOfWork, 
+        public NewsService(IUnitOfWork unitOfWork,
             IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
             _configuration = configuration;
         }
-       
+
         public async Task<IEnumerable<NewsDto>> GetNewsBySourseId(Guid? id)
         {
             if (!id.HasValue)
@@ -32,13 +32,13 @@ namespace NewsAggregators.Services.Implementation
                 Log.Warning("Id in NewsService.GetNewsBySourseId was null");
             }
 
-            var news = id.HasValue 
-                ? await _unitOfWork.News.FindBy(n 
+            var news = id.HasValue
+                ? await _unitOfWork.News.FindBy(n
                         => n.RssSourseId.Equals(id.GetValueOrDefault()))
                     .ToListAsync()
-                : await _unitOfWork.News.FindBy(n => n.Id!=null).ToListAsync();
+                : await _unitOfWork.News.FindBy(n => n != null).ToListAsync();
 
-            
+
 
             return news.Select(n => new NewsDto()
             {
@@ -68,8 +68,8 @@ namespace NewsAggregators.Services.Implementation
         public async Task<NewsWithRssNameDto> GetNewsWithRssSourseNameById(Guid id)
         {
             var result = await _unitOfWork.News
-                .FindBy(n => n.RssSourseId.HasValue, 
-                    n=>n.RssSourse, n=>n.Comments)
+                .FindBy(n => n.RssSourseId.HasValue,
+                    n => n.RssSourse, n => n.Comments)
                 .Select(n => new NewsWithRssNameDto()
                 {
                     Id = n.Id,
@@ -99,7 +99,7 @@ namespace NewsAggregators.Services.Implementation
 
                     foreach (var syndicationItem in feed.Items)
                     {
-                        if (!currentNewsUrls.Any(url=>url.Equals(syndicationItem.Id)))
+                        if (!currentNewsUrls.Any(url => url.Equals(syndicationItem.Id)))
                         {
                             var newsDto = new NewsDto()
                             {
@@ -113,7 +113,7 @@ namespace NewsAggregators.Services.Implementation
                         }
                     }
                 }
-               
+
             }
 
             return news;
@@ -147,7 +147,7 @@ namespace NewsAggregators.Services.Implementation
                 Summary = news.Summary
             };
 
-            await _unitOfWork.News.AddRange(new []{entity});
+            await _unitOfWork.News.AddRange(new[] { entity });
         }
 
         public async Task AddRange(IEnumerable<NewsDto> news)
