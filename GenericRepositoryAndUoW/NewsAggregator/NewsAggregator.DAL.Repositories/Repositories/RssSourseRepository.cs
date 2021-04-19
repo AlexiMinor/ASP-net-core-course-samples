@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using NewsAggregator.DAL.Core;
+﻿using NewsAggregator.DAL.Core;
 using NewsAggregator.DAL.Core.Entities;
-using NewsAggregator.DAL.Repositories.Interfaces;
 
-namespace NewsAggregator.DAL.Repositories.Implementation
+namespace NewsAggregator.DAL.Repositories.Implementation.Repositories
 {
     public class RssSourseRepository : Repository<RssSourse>
     {
-        private readonly NewsAggregatorContext _context;
-
         public RssSourseRepository(NewsAggregatorContext context) : base(context)
         {
-            _context = context;
         }
     }
 }

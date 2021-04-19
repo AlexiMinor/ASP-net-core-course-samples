@@ -10,8 +10,8 @@ using NewsAggregator.DAL.Core;
 namespace NewsAggregator.DAL.Core.Migrations
 {
     [DbContext(typeof(NewsAggregatorContext))]
-    [Migration("20210407164137_DateTime")]
-    partial class DateTime
+    [Migration("20210414191055_AddRoles")]
+    partial class AddRoles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,6 +76,20 @@ namespace NewsAggregator.DAL.Core.Migrations
                     b.ToTable("News");
                 });
 
+            modelBuilder.Entity("NewsAggregator.DAL.Core.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("NewsAggregator.DAL.Core.Entities.RssSourse", b =>
                 {
                     b.Property<Guid>("Id")
@@ -99,13 +113,24 @@ namespace NewsAggregator.DAL.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Users");
                 });
@@ -138,9 +163,25 @@ namespace NewsAggregator.DAL.Core.Migrations
                     b.Navigation("RssSourse");
                 });
 
+            modelBuilder.Entity("NewsAggregator.DAL.Core.Entities.User", b =>
+                {
+                    b.HasOne("NewsAggregator.DAL.Core.Entities.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("NewsAggregator.DAL.Core.Entities.News", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("NewsAggregator.DAL.Core.Entities.Role", b =>
+                {
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("NewsAggregator.DAL.Core.Entities.RssSourse", b =>

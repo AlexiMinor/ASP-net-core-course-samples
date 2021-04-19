@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using NewsAggregator.Core.Services.Interfaces;
 using NewsAggregator.DAL.Core;
@@ -13,6 +14,11 @@ using NewsAggregator.DAL.Repositories.Interfaces;
 using NewsAggregator.Filters;
 using NewsAggregators.Services.Implementation;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using NewsAggregator.AuthorizationPolicies;
+using NewsAggregator.DAL.Repositories.Implementation.Repositories;
+using NewsAggregators.Services.Implementation.Mapping;
 
 
 namespace NewsAggregator
@@ -36,18 +42,53 @@ namespace NewsAggregator
 
             services.AddTransient<IRepository<News>, NewsRepository>(); // for all repositories
             services.AddTransient<IRepository<RssSourse>, RssSourseRepository>(); // for all repositories
-
+            services.AddTransient<IRepository<User>, UserRepository>(); // for all repositories
+            services.AddTransient<IRepository<Role>, RoleRepository>(); // for all repositories
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IRssSourseService, RssSourseService>();
-
             services.AddTransient<OnlinerParser>();
             services.AddTransient<TutByParser>();
-
             services.AddScoped<CheckDataFilterAttribute>();
             services.AddScoped<CustomExceptionFilterAttribute>();
 
-            services.AddAutoMapper(typeof(Startup));
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapping());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(opt =>
+                {
+                    opt.LoginPath = new PathString("/Account/Login");
+                    opt.AccessDeniedPath = new PathString("/Account/Login");
+                });
+
+            //Claims-based authorization
+            //services.AddAuthorization(opt =>
+            //{
+            //    opt.AddPolicy("18-Content", policy =>
+            //        {
+            //            policy.RequireClaim("age", "18");
+            //        });
+            //});
+
+            //Policy-based authorization
+            //services.AddAuthorization(opt =>
+            //{
+            //    opt.AddPolicy("18+Content", policy =>
+            //        {
+            //            policy.Requirements.Add(new MinAgeRequirement(18));
+            //        });
+            //});
+            //services.AddSingleton<IAuthorizationHandler, MinAgeHandler>();
+
 
             services.AddControllersWithViews()
                 .AddMvcOptions(opt
@@ -62,27 +103,28 @@ namespace NewsAggregator
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
-            //}
+            }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting(); // Endpoint Routing Middleware 
 
+            app.UseAuthentication();
             app.UseAuthorization();
             //app.UseMiddleware<TokenMiddleware>();
 
 
-            app.MapWhen(context => context.Request.Query.ContainsKey("admin") && context.Request.Query["admin"] == "true", 
-                GenerateCustomIndex);
+            //app.MapWhen(context => context.Request.Query.ContainsKey("admin") && context.Request.Query["admin"] == "true", 
+            //    GenerateCustomIndex);
 
             app.UseEndpoints(endpoints =>
             {
@@ -107,8 +149,6 @@ namespace NewsAggregator
             //{
             //    context.Request.Headers.Add("added from middleware2", new StringValues("12345"));
             //});
-
-            
         }
 
         private static void GenerateCustomIndex(IApplicationBuilder app)

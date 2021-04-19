@@ -8,7 +8,7 @@ using NewsAggregator.DAL.Core;
 using NewsAggregator.DAL.Core.Entities;
 using NewsAggregator.DAL.Repositories.Interfaces;
 
-namespace NewsAggregator.DAL.Repositories.Implementation
+namespace NewsAggregator.DAL.Repositories.Implementation.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : class, IBaseEntity
     {
@@ -45,14 +45,14 @@ namespace NewsAggregator.DAL.Repositories.Implementation
             return Table;
         }
 
-        public async Task Add(T news)
+        public async Task Add(T entity)
         {
-            throw new NotImplementedException();
+            await Table.AddAsync(entity);
         }
 
         public async Task AddRange(IEnumerable<T> entities)
         {
-            Table.AddRange(entities);
+            await Table.AddRangeAsync(entities);
 
         }
 

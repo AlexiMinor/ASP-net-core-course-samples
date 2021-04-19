@@ -42,6 +42,8 @@ namespace NewsAggregators.Services.Implementation
                     .ToListAsync()
                 : await _unitOfWork.News.FindBy(n => n != null).ToListAsync();
 
+
+
             return news.Select(n => _mapper.Map<NewsDto>(n)).ToList();
 
         }
@@ -60,9 +62,7 @@ namespace NewsAggregators.Services.Implementation
 
             var mappingResult = _mapper.Map<NewsWithRssNameDto>(result);
 
-            mappingResult.RssSourseName = result.RssSourse.Name;
-            
-            return result;
+            return mappingResult;
         }
 
         public async Task<IEnumerable<NewsDto>> GetNewsInfoFromRssSourse(RssSourseDto rssSourse)

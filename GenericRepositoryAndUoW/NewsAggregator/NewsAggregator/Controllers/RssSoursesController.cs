@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using NewsAggregator.DAL.Core;
 using NewsAggregator.DAL.Core.Entities;
 
 namespace NewsAggregator.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RssSoursesController : Controller
     {
         private readonly NewsAggregatorContext _context;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NewsAggregator.Core.DataTransferObjects;
 using NewsAggregator.Core.Services.Interfaces;
@@ -14,6 +15,9 @@ using Serilog;
 
 namespace NewsAggregator.Controllers
 {
+    //[Authorize(Policy = "18+Content")]
+    //[Authorize(Roles = "user")]
+    [Authorize(Roles = "Admin, User")]
     public class NewsController : Controller
     {
         private readonly INewsService _newsService;
@@ -32,14 +36,10 @@ namespace NewsAggregator.Controllers
         }
 
         // GET: News
-
-        [Route("Лист_новостей")]
+        //[Route("Лист_новостей")]
         public async Task<IActionResult> Index(Guid? sourseId, int page = 1)
         {
-            //if (sourseId == null)
-            //{
-            //    return NotFound();
-            //}
+        
             var news = (await _newsService.GetNewsBySourseId(sourseId))
                 .ToList();
 
@@ -54,9 +54,9 @@ namespace NewsAggregator.Controllers
                 TotalItems = news.Count
             };
 
-
             return View(new NewsListWithPaginationInfo()
             {
+                IsAdmin = false,//_RoleService.IsUserIsAdmin(ClaimsPrincliple HttpContext.User)
                 News = newsPerPages,
                 PageInfo = pageInfo
             });

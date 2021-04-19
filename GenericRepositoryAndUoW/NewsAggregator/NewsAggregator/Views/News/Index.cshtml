@@ -6,13 +6,12 @@
 }
 
 <h1>View</h1>
-
+@if(Model.IsAdmin)
+{ 
 <p>
-    @*<a href="~/News/Create">Create New</a>
-    @Html.ActionLink("Create New","Create", "News")*@
     <a asp-controller="News" asp-action="Aggregate">Aggregate</a>
-    @*<a asp-action="Create">Create New</a>*@
 </p>
+}
 
 <div class="row">
     @*@Html.CreateListNews(Model.News)*@

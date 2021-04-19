@@ -21,15 +21,7 @@ namespace NewsAggregator.Controllers
 
         public IActionResult Index()
         {
-            try
-            {
-                throw new Exception("test");
-            }
-            catch (Exception e)
-            {
-                Log.Fatal(e, "Unhanded exception was throwed by app");
-                throw;
-            }
+        
             return View();
 
         }
