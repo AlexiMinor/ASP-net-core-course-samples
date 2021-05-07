@@ -21,7 +21,10 @@ function toggleComments(newsId)
         }
         isCommentsDisplayed = !isCommentsDisplayed;
     }
-   
+
+    commentsDisplaySwitcherElement.addEventListener('onclose', function () {
+        alert('closed');
+    }, false);
 }
 
 function loadComments(newsId, commentsContainer) {
