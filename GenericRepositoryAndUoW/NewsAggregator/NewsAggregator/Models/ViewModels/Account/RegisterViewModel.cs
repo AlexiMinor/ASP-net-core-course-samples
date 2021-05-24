@@ -21,25 +21,15 @@ namespace NewsAggregator.Models.ViewModels.Account
         public string Password { get; set; }
 
         [Required]
-        [Compare("Password", ErrorMessage = "123123")]
+        [Compare("Password")]
         public string PasswordConfirmation { get; set; }
 
-        public string FullName { get; set; }
-
-        [Range(1, 2)]
-        public string Value { get; set; }
 
         //public string FirstName { get; set; }
         //public string LastName { get; set; }
         //public string SecondName { get; set; } 
         //public string Patronymic { get; set; } 
 
-
-        [Required]
-        //[RegularExpression("^[0-9*#+-()]+$")]
-        [Phone]
-        [CreditCard]
-        public string PhoneNumber { get; set; }
     
     }
 }

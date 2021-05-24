@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -34,9 +35,9 @@ namespace NewsAggregator.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            var passValidationMessage = PasswordValidation(model.Password);
+            //var passValidationMessage = PasswordValidation(model.Password);
 
-            if (ModelState.IsValid && string.IsNullOrEmpty(passValidationMessage))
+            if (ModelState.IsValid /*&& string.IsNullOrEmpty(passValidationMessage)*/)
             {
                 var passwordHash = _userService.GetPasswordHash(model.Password);
 
@@ -54,16 +55,12 @@ namespace NewsAggregator.Controllers
                 return BadRequest(model);
             }
 
-            ModelState.AddModelError("", passValidationMessage);
+            //ModelState.AddModelError("", passValidationMessage);
 
             return View(model);
         }
 
-        private string PasswordValidation(string password)
-        {
-            //todo logic
-            return "1231231";
-        }
+
 
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> CheckEmail(string email)
@@ -110,8 +107,19 @@ namespace NewsAggregator.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-      
+        [HttpGet]
+        public IActionResult UserInfo()
+        {
+            var user = HttpContext.User.Claims.FirstOrDefault(c => c.Type.Equals(ClaimsIdentity.DefaultNameClaimType));
 
+            return View(user != null ? "LogoutPartial" : "LoginPartial");
+        }
+
+        //private string PasswordValidation(string password)
+        //{
+        //    //todo logic
+        //    return "1231231";
+        //}
         private async Task Authenticate(UserDto dto)
         {
             try

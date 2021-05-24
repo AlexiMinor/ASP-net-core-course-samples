@@ -86,3 +86,13 @@ body {
 div::selection {
     background-color: red;
 }
+
+.comments-block {
+    margin-top: 20px;
+}
+.write-comment-btn {
+    margin-top: 10px;
+}
+.comment-card {
+    margin-top: 5px;
+}

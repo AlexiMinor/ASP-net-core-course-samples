@@ -7,12 +7,15 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.32" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="System.ServiceModel.Syndication" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NewsAggregator.Core.Interfaces.Services\NewsAggregator.Core.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\NewsAggregator.DAL.CQRS\NewsAggregator.DAL.CQRS.csproj" />
     <ProjectReference Include="..\NewsAggregator.DAL.Entities\NewsAggregator.DAL.Core.csproj" />
     <ProjectReference Include="..\NewsAggregator.DAL.RepositoriesInterfaces\NewsAggregator.DAL.Repositories.Interfaces.csproj" />
     <ProjectReference Include="..\NewsAggregator.DAL.Repositories\NewsAggregator.DAL.Repositories.Implementation.csproj" />

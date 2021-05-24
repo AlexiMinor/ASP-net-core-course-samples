@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using NewsAggregator.Core.DataTransferObjects;
+using NewsAggregator.Core.Services.Interfaces;
 using NewsAggregator.DAL.Repositories.Implementation;
 
-namespace NewsAggregator.Core.Services.Interfaces
+namespace NewsAggregators.Services.Implementation
 {
     public class RssSourseService : IRssSourseService
     {
@@ -32,35 +33,16 @@ namespace NewsAggregator.Core.Services.Interfaces
                 }).ToListAsync();
         }
 
-        public async Task<IEnumerable<RssSourseDto>> GetRssSoursesByIds(IEnumerable<Guid> ids)
-        {
-            return await _unitOfWork.RssSources.FindBy(sourse => ids.Contains(sourse.Id))
-                .Select(sourse => _mapper.Map<RssSourseDto>(sourse)).ToListAsync();
-        }
-
         public async Task<RssSourseDto> GetRssSourseById(Guid id)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<RssSourseDto>(await _unitOfWork.RssSources.GetById(id));
         }
 
-        public async Task<int> AddRssSourse(RssSourseDto news)
+        public async Task<IEnumerable<RssSourseDto>> GetRssSoursesByNameAndUrl(string name, string url)
         {
-            throw new NotImplementedException();
-        }
 
-        public async Task<IEnumerable<RssSourseDto>> AddRange(IEnumerable<RssSourseDto> news)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<int> EditRssSourse(RssSourseDto news)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<int> Delete(RssSourseDto news)
-        {
-            throw new NotImplementedException();
+            return await _unitOfWork.RssSources.FindBy(sourse => sourse.Name.Contains(name))
+                .Select(sourse => _mapper.Map<RssSourseDto>(sourse)).ToListAsync();
         }
     }
 }

@@ -31,7 +31,9 @@ namespace NewsAggregators.Services.Implementation
         {
             return await _unitOfWork.Comments
                 .FindBy(comment => comment.NewsId.Equals(id))
-                .Select(comment => _mapper.Map<CommentDto>(comment)).ToListAsync();
+                .OrderBy(dto => dto.Created)
+                .Select(comment => _mapper.Map<CommentDto>(comment))
+                .ToListAsync();
         }
 
         public async Task AddComment(CommentDto comment)

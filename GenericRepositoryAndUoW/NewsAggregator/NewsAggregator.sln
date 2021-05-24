@@ -23,7 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.DAL.Reposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.DAL.Repositories.Interfaces", "NewsAggregator.DAL.RepositoriesInterfaces\NewsAggregator.DAL.Repositories.Interfaces.csproj", "{D46FDFF6-97B6-47C0-8DB5-8B8ECF0B841E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.IdentitySample", "NewsAggregator.IdentitySample\NewsAggregator.IdentitySample.csproj", "{C1A410C9-C627-4D88-807B-27300DA25CD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.IdentitySample", "NewsAggregator.IdentitySample\NewsAggregator.IdentitySample.csproj", "{C1A410C9-C627-4D88-807B-27300DA25CD3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewsAggregator.WebAPI", "NewsAggregator.WebAPI\NewsAggregator.WebAPI.csproj", "{0C8A4E09-2C44-4EB0-9622-C3A953B7EAF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAggregator.DAL.CQRS", "NewsAggregator.DAL.CQRS\NewsAggregator.DAL.CQRS.csproj", "{695AC2E7-C8B5-4049-A143-F710DD4DA9B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,14 @@ Global
 		{C1A410C9-C627-4D88-807B-27300DA25CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1A410C9-C627-4D88-807B-27300DA25CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A410C9-C627-4D88-807B-27300DA25CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C8A4E09-2C44-4EB0-9622-C3A953B7EAF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C8A4E09-2C44-4EB0-9622-C3A953B7EAF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C8A4E09-2C44-4EB0-9622-C3A953B7EAF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C8A4E09-2C44-4EB0-9622-C3A953B7EAF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{695AC2E7-C8B5-4049-A143-F710DD4DA9B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{695AC2E7-C8B5-4049-A143-F710DD4DA9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{695AC2E7-C8B5-4049-A143-F710DD4DA9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{695AC2E7-C8B5-4049-A143-F710DD4DA9B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +86,7 @@ Global
 		{8C27AE08-2605-43FE-B50B-1DA0A6795AF5} = {96CF97B3-60DC-4AE3-B0BD-74BE15594899}
 		{AE120380-845C-44E3-8E1F-AF2B6E709FA3} = {942D0AD7-4B3C-42B8-8DBB-002A45BF36D7}
 		{D46FDFF6-97B6-47C0-8DB5-8B8ECF0B841E} = {942D0AD7-4B3C-42B8-8DBB-002A45BF36D7}
+		{695AC2E7-C8B5-4049-A143-F710DD4DA9B5} = {942D0AD7-4B3C-42B8-8DBB-002A45BF36D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F14EDAD-4CB2-41D0-A537-8CAFF1642B85}

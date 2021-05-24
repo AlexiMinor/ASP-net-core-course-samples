@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using NewsAggregator.Core.DataTransferObjects;
 using NewsAggregator.DAL.Core.Entities;
-using NewsAggregator.DAL.Repositories.Implementation;
 
 namespace NewsAggregators.Services.Implementation.Mapping
 {

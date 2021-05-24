@@ -1,4 +1,13 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿let loginRequest = new XMLHttpRequest();
+//create request
+loginRequest.open('GET', '/Account/UserInfo', true);
+//create request handler
+loginRequest.onload = function () {
+    if (loginRequest.status >= 200 && loginRequest.status < 400) {
+        let resp = loginRequest.responseText;
+        document.getElementById('navbar-row').innerHTML += resp;
+    }
+}
 
-// Write your JavaScript code.
+//send request
+loginRequest.send();

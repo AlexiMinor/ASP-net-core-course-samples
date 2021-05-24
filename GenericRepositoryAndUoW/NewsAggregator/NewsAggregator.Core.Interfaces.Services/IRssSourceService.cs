@@ -9,12 +9,6 @@ namespace NewsAggregator.Core.Services.Interfaces
     {
         Task<IEnumerable<RssSourseDto>> GetAllRssSources();
         Task<RssSourseDto> GetRssSourseById(Guid id);
-        Task<IEnumerable<RssSourseDto>> GetRssSoursesByIds(IEnumerable<Guid> ids);
-        Task<int> AddRssSourse(RssSourseDto news);
-        Task<IEnumerable<RssSourseDto>> AddRange(IEnumerable<RssSourseDto> news);
-
-        Task<int> EditRssSourse(RssSourseDto news);
-        Task<int> Delete(RssSourseDto news);
-
+        Task<IEnumerable<RssSourseDto>> GetRssSoursesByNameAndUrl(string name, string url);
     }
 }
