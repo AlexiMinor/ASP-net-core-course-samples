@@ -50,8 +50,8 @@ namespace NewsAggregator.Controllers
             // (size of dto)*News.Count 
 
             //Variant2
-            var rssSourses = _rssSourseService.GetRssSoursesByIds(
-                news.Select(dto => dto.RssSourseId.GetValueOrDefault()).Distinct().ToArray()); //(size of dto)*N(unique rss from news)
+            //var rssSourses = _rssSourseService.GetRssSourseById(
+            //    news.FirstOrDefault(dto => dto.RssSourseId.Equals(sourseId)); //(size of dto)*N(unique rss from news)
 
 
             var pageSize = 500;

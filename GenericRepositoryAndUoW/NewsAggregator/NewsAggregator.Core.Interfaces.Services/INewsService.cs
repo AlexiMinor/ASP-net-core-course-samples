@@ -12,7 +12,11 @@ namespace NewsAggregator.Core.Services.Interfaces
         Task<IEnumerable<NewsDto>> GetNewsInfoFromRssSourse(RssSourseDto rssSourse);
         Task<NewsWithRssNameDto> GetNewsWithRssSourseNameById(Guid id);
 
+        Task Aggregate();
+        Task RateNews();
+
         Task AddNews(NewsDto news);
+        
         Task AddRange(IEnumerable<NewsDto> news);
 
         Task<int> EditNews(NewsDto news);

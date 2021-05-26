@@ -45,7 +45,8 @@ namespace NewsAggregator.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post()
         {
-            
+
+            return Ok();
         }
     }
 }

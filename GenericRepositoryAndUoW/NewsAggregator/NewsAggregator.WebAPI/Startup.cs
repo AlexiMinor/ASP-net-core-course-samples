@@ -13,6 +13,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
+using Hangfire;
+using Hangfire.SqlServer;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NewsAggregator.Core.Services.Interfaces;
@@ -51,12 +53,26 @@ namespace NewsAggregator.WebAPI
             services.AddTransient<IRepository<Role>, RoleRepository>(); // for all repositories
             services.AddTransient<IRepository<Comment>, CommentsRepository>(); // for all repositories
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<INewsService, NewsCqsService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IRssSourseService, RssSourseCqsService>();
+
+            services.AddHangfire(conf => conf
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(connString, new SqlServerStorageOptions
+                {
+                    CommandBatchMaxTimeout = TimeSpan.FromMinutes(30),
+                    SlidingInvisibilityTimeout = TimeSpan.FromMinutes(30),
+                    QueuePollInterval = TimeSpan.Zero,
+                    UseRecommendedIsolationLevel = true,
+                    DisableGlobalLocks = true
+                }));
+
+            services.AddHangfireServer();
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -76,14 +92,20 @@ namespace NewsAggregator.WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NewsAggregator.WebAPI v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NewsAggregator.WebAPI v1"));
+
+            app.UseHangfireDashboard();
+            
+            var newsService = serviceProvider.GetService(typeof(INewsService)) as INewsService;
+            RecurringJob.AddOrUpdate(()=> newsService.RateNews(), "0,15,30,45 * * * *");
 
             app.UseHttpsRedirection();
 
@@ -94,6 +116,7 @@ namespace NewsAggregator.WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHangfireDashboard();
             });
         }
     }

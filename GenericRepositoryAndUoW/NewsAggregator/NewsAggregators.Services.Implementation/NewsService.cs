@@ -72,6 +72,16 @@ namespace NewsAggregators.Services.Implementation
             return mappingResult;
         }
 
+        public async Task Aggregate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task RateNews()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<NewsDto>> GetNewsInfoFromRssSourse(RssSourseDto rssSourse)
         {
             var news = new List<NewsDto>();
