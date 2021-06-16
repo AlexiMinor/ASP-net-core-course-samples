@@ -107,6 +107,17 @@ namespace NewsAggregator.WebAPI
                 };
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Default",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    });
+
+              
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -132,7 +143,8 @@ namespace NewsAggregator.WebAPI
            
             app.UseHttpsRedirection();
             app.UseRouting();
-           
+            app.UseCors("Default");
+
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -72,6 +72,11 @@ namespace NewsAggregators.Services.Implementation
             return mappingResult;
         }
 
+        public async Task<IEnumerable<NewsDto>> GetTopRatedNews()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task Aggregate()
         {
             throw new NotImplementedException();

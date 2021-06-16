@@ -11,6 +11,7 @@ namespace NewsAggregator.Core.Services.Interfaces
         Task<NewsDto> GetNewsById(Guid id);
         Task<IEnumerable<NewsDto>> GetNewsInfoFromRssSourse(RssSourseDto rssSourse);
         Task<NewsWithRssNameDto> GetNewsWithRssSourseNameById(Guid id);
+        Task<IEnumerable<NewsDto>> GetTopRatedNews();
 
         Task Aggregate();
         Task RateNews();

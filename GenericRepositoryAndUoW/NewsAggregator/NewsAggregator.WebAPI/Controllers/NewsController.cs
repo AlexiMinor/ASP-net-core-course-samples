@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using NewsAggregator.Core.DataTransferObjects;
 using NewsAggregator.Core.Services.Interfaces;
 
@@ -36,9 +37,9 @@ namespace NewsAggregator.WebAPI.Controllers
 
        
         [HttpGet]
-        public async Task<IActionResult> Get(string name, string url, Guid sourseId)
+        public async Task<IActionResult> Get()
         {
-            var news = await _newsService.GetNewsBySourseId(null);
+            var news = await _newsService.GetTopRatedNews();
 
             return Ok(news);
         }

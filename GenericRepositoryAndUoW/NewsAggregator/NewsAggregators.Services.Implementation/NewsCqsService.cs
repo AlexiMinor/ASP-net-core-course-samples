@@ -33,9 +33,16 @@ namespace NewsAggregators.Services.Implementation
 
         public async Task<IEnumerable<NewsDto>> GetNewsBySourseId(Guid? id)
         {
-            throw new NotImplementedException();
 
+            return null;
         }
+
+        public async Task<IEnumerable<NewsDto>> GetTopRatedNews()
+        {
+            var news = await _mediator.Send(new GetTopRatedNewsQuery()) as IEnumerable<NewsDto>;
+            return news ;
+        }
+        
 
         public async Task<NewsDto> GetNewsById(Guid id)
         {
